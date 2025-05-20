@@ -14,4 +14,31 @@
  *= require_self
  */
 
- 
+
+body {
+  background: linear-gradient(135deg, #2A6329 0%, #8DBD7D 100%);
+  min-height: 100vh;
+  padding: 2rem 0;
+}
+
+.task-card {
+  max-width: 600px;
+  margin: 0 auto;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.task-list {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.task-item {
+  transition: all 0.3s ease;
+}
+
+.task-item:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}

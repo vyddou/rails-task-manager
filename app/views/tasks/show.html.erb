@@ -1,13 +1,49 @@
-<h1><%= @task.title %></h1>
+<div class="task-card">
+  <div class="card">
+    <div class="card-header text-white" style="background-color: #2A6329;">
+      <h1 class="h4 mb-0 text-center"><%= @task.title %></h1>
+    </div>
 
-<p><strong>Détails :</strong> <%= @task.details %></p>
-<p><strong>Statut :</strong> <%= @task.completed ? "✅ Terminée" : "❌ En cours" %></p>
+    <div class="card-body">
+      <div class="mb-4">
+        <h5 class="text-muted">Description</h5>
+        <div class="p-3 bg-light rounded"><%= @task.details %></div>
+      </div>
 
-<%= link_to "Modifier", edit_task_path(@task), class: "btn btn-primary" %>
-<%= link_to "Supprimer",
-            task_path(@task),  # Changé de 'task' à '@task'
-            method: :delete,
-            data: { turbo_method: :delete, turbo_confirm: "Êtes-vous sûr ?" },
-            class: "btn btn-danger" %>
+      <div class="d-flex justify-content-between align-items-center mb-4">
+        <div>
+          <h5 class="text-muted">Statut</h5>
+          <span class="badge <%= @task.completed ? 'bg-success' : 'bg-warning' %> p-2">
+            <%= @task.completed ? "Terminée" : "En cours" %>
+          </span>
+        </div>
 
-<%= link_to "Retour à la liste", tasks_path, class: "btn btn-secondary" %>
+        <div>
+          <h5 class="text-muted">Dernière mise à jour</h5>
+          <span class="text-muted"><%= @task.updated_at.strftime("%d/%m/%Y à %H:%M") %></span>
+        </div>
+      </div>
+    </div>
+
+    <div class="card-footer bg-light">
+      <div class="d-flex justify-content-between">
+        <%= link_to tasks_path, class: "btn btn-outline-secondary" do %>
+          <i class="fas fa-arrow-left me-2"></i>Retour
+        <% end %>
+
+        <div>
+          <%= link_to edit_task_path(@task), class: "btn btn-primary me-2" do %>
+            <i class="fas fa-edit me-2"></i>Modifier
+          <% end %>
+
+          <%= link_to task_path(@task),
+                      method: :delete,
+                      data: { turbo_method: :delete, turbo_confirm: "Êtes-vous sûr ?" },
+                      class: "btn btn-danger" do %>
+            <i class="fas fa-trash-alt me-2"></i>Supprimer
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

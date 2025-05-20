@@ -1,11 +1,30 @@
-<h1>Ma Liste de Tâches</h1>
+<div class="task-list">
+  <div class="card mb-4">
+    <div class="card-header bg-white">
+      <h1 class="text-center mb-0">Ma Liste de Tâches</h1>
+    </div>
 
-<ul>
-  <% @tasks.each do |task| %>
-    <li>
-      <%= link_to task.title, task_path(task) %>
-    </li>
-  <% end %>
-</ul>
+    <ul class="list-group list-group-flush">
+      <% @tasks.each do |task| %>
+        <li class="list-group-item task-item">
+          <div class="d-flex justify-content-between align-items-center">
+            <div>
+              <h5 class="mb-1"><%= link_to task.title, task_path(task), class: "text-decoration-none" %></h5>
+              <small class="text-muted">Créée le <%= task.created_at.strftime("%d/%m/%Y") %></small>
+            </div>
 
-<%= link_to "Créer une nouvelle tâche", new_task_path, class: "btn btn-success" %>
+            <% if task.completed? %>
+              <span class="badge bg-success rounded-pill"><i class="fas fa-check"></i></span>
+            <% end %>
+          </div>
+        </li>
+      <% end %>
+    </ul>
+
+    <div class="card-footer bg-white text-center">
+      <%= link_to new_task_path, class: "btn btn-success btn-lg rounded-pill px-4" do %>
+        <i class="fas fa-plus me-2"></i>Nouvelle Tâche
+      <% end %>
+    </div>
+  </div>
+</div>
